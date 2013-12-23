@@ -1,0 +1,4 @@
+megs: 128
+floppya: 1_44=out/floppy.img, status=inserted
+boot: floppy
+display_library: sdl

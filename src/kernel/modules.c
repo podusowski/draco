@@ -4,7 +4,7 @@
 
 void modules_init(multiboot_info_t * multiboot_info)
 {
-	printf("[ "MODULE_NAME" ] loading: ");
+	printf("[ "MODULE_NAME" ] loading multiboot modules\n");
 
 	uint32 i;
 	void * proc_mem;
@@ -14,6 +14,7 @@ void modules_init(multiboot_info_t * multiboot_info)
 	{
 
 		/** ELF EXEC */
+		/*
 		if (*((char *)(modules[i].mod_start)) == 0x7f)
 		{
 			elf_dump(modules[i].mod_start);
@@ -21,12 +22,12 @@ void modules_init(multiboot_info_t * multiboot_info)
 			elf_exec(modules[i].string, modules[i].mod_start, modules[i].mod_end - modules[i].mod_start);
 			continue;
 		}
+		*/
 
-		printf("%s ", modules[i].string);
+		//printf("  %s\n", modules[i].string);
 
 		proc_mem = proc_createenv(modules[i].mod_end - modules[i].mod_start);
 		memcpy(get_physical_address(proc_mem, KERNEL_MEMORY), modules[i].mod_start, modules[i].mod_end - modules[i].mod_start);
 		proc_add(modules[i].string, PROC_CLASS_A, proc_mem, modules[i].mod_end - modules[i].mod_start, KERNEL_MEMORY);
 	}
-	printf("\n");
 }

@@ -39,6 +39,11 @@ char readkey()
 {
 	char key;
 	char kbd_scancode = inb(0x60);
+
+	// FIXME: for some reason, we need to make some syscall to make this work,
+	//        otherwise the keyboard buffer gets full
+	getpid();
+
 	if (escaped) kbd_scancode += 256;
 
 	switch (kbd_scancode) 
@@ -65,7 +70,7 @@ void do_gets(int pid, char * buffer)
 	char key = 0;
 	static int i, k;
 
-	(unsigned long)buffer += (unsigned long)frame;
+	buffer = (char*)((unsigned long)buffer + (unsigned long)frame);
 
 	i = 0;
 	while (key != '\n')

@@ -1,0 +1,13 @@
+default 0
+timeout 1
+
+title Draco
+root (fd0)
+kernel /bin/kernel
+module /bin/idle.dri
+#module /bin/floppyd.dri
+#module /bin/moused.dri
+module /bin/keybd.dri
+#module /bin/mon.dri
+module /bin/sh.dri
+#module /bin/storaged.dri

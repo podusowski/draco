@@ -62,7 +62,9 @@ void schedule()
 		if (current_task > highest_task)
 			current_task = 0;
 		if (proctab[current_task].used && proctab[current_task].state == PROC_STATE_READY) 
+		{
 			return;
+	    }
 	}
 }
 
@@ -148,6 +150,10 @@ uint32 get_free_pid()
 */
 uint32 proc_add(char * name, uint8 class, uint32 address, uint32 image_size, uint32 e_entry)
 {
+#ifdef DEBUG
+	printf("[ "MODULE_NAME" ] executing %s\n", name);
+#endif
+
 	uint32 pid = get_free_pid();
 
 	memcpy(&proctab[pid].name, name, strlen(name));
@@ -276,7 +282,7 @@ uint32 proc_exec(char * name, void * image, uint32 size)
 	/** TODO: zaladuj nowy cr3 */
 	void * frame = proc_createsharedframe(current_task); /* mam nadzieje, ze zadziala */
 
-	memcpy(frame + image, PROCESS_MEMORY, size); /* kopiujemy obraz do nowej przestrzeni */
+	memcpy((uint32)frame + (uint32)image, PROCESS_MEMORY, size); /* kopiujemy obraz do nowej przestrzeni */
 	uint32 e_entry = elf_relocate(PROCESS_MEMORY);
 	uint32 result = proc_add(name, PROC_CLASS_A, frame, size, e_entry);
 	/** TODO: przywroc cr3 */

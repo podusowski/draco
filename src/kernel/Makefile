@@ -21,6 +21,7 @@ OBJS =	entry.o \
 CFLAGS = -O2 -fomit-frame-pointer -I include -I ../../include -nostdinc -fno-builtin -DDEBUG
 
 $(OUTFILE): $(OBJS)
+	mkdir -p `dirname $@`
 	ld -T link.ld -o $(OUTFILE) $(OBJS)
 
 .asm.o:

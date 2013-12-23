@@ -1,0 +1,56 @@
+#!/bin/sh
+
+error()
+{
+	cat compile.log
+	exit 1
+}
+
+compile()
+{
+	echo ">> making $1"
+	cd src/$1
+	#rm *.o 2> /dev/null
+	rm compile.log 2> /dev/null
+	make > /dev/null 2> compile.log || error
+	#rm *.o
+	cd ../..
+}
+
+# move to /
+cd ..
+
+#libs
+compile libsys
+compile libc
+
+#kernel
+compile kernel
+
+#userland
+compile crt0
+compile storaged
+compile idle
+compile mon
+compile floppyd
+compile moused
+compile keybd
+compile sh
+
+#floppy
+cp extern/floppy.img.generic extern/floppy.img
+mkdir /var/tmp/draco-floppy
+mdconfig -a -t vnode -f extern/floppy.img -u 4
+mount -w -t msdosfs /dev/md4 /var/tmp/draco-floppy
+
+cp -R bin /var/tmp/draco-floppy/bin
+cp -R include /var/tmp/draco-floppy/include
+cp -R lib /var/tmp/draco-floppy/lib
+cp -R src /var/tmp/draco-floppy/src
+cp extern/MENU.LST /var/tmp/draco-floppy/boot/grub/MENU.LST
+
+umount /var/tmp/draco-floppy
+mdconfig -d -u md4
+rm -r /var/tmp/draco-floppy
+
+bochs -q -f extern/bochsrc.bxrc

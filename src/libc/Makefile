@@ -15,6 +15,7 @@ OBJS =	memcpy.o \
 CFLAGS = -O2 -fomit-frame-pointer -I include -I ../../include -nostdinc -fno-builtin -DDEBUG
 
 $(OUTFILE): $(OBJS)
+	mkdir -p `dirname $@`
 	ld -r -o $(OUTFILE) $(OBJS)
 
 .asm.o:
