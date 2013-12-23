@@ -16,11 +16,11 @@ CFLAGS = -O2 -fomit-frame-pointer -I include -I ../../include -nostdinc -fno-bui
 
 $(OUTFILE): $(OBJS)
 	mkdir -p `dirname $@`
-	ld -r -o $(OUTFILE) $(OBJS)
+	ld -melf_i386 -r -o $(OUTFILE) $(OBJS)
 
 .asm.o:
 	nasm $*.asm -o $*.o -f elf
 
 .c.o:
-	gcc -c $(CFLAGS) -o $*.o $*.c
+	gcc -m32 -c $(CFLAGS) -o $*.o $*.c
 

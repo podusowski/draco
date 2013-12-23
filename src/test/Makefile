@@ -14,6 +14,6 @@ OBJS = 	../../libc/memcpy.o \
 CFLAGS = -O2 -fomit-frame-pointer -I ../../kernel/include -I ../../libc/include -nostdinc -fno-builtin -DDEBUG
 
 all:
-	gcc -c $(CFLAGS) -o $(NAME).o $(NAME).c
+	gcc -m32 -c $(CFLAGS) -o $(NAME).o $(NAME).c
 	#gcc -S $(CFLAGS) -o $(NAME).s $(NAME).c
 	ld -Map map.txt -T link.ld -o ../../bin/$(NAME).dri --start-group ../entry/entry.o $(NAME).o $(OBJS) --end-group
