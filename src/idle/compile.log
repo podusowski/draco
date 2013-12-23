@@ -1,0 +1,3 @@
+idle.c: In function `main':
+idle.c:2: warning: return type of 'main' is not `int'
+ld: warning: cannot find entry symbol _start; defaulting to 0000000001000080

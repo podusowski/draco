@@ -1,0 +1,152 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+ultoabuf            0x9               ../../libc/ultoa.o
+msg                 0x10              test.o
+addr                0x4               test.o
+buf                 0x200             test.o
+name                0x20              test.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.text           0x0000000001000000      0x71d
+                0x0000000001000000                code = .
+                0x0000000001000000                _code = .
+ *(.text)
+ .text          0x0000000001000000        0xb ../entry/entry.o
+ *fill*         0x000000000100000b 0x100000b00000001 00
+ .text          0x000000000100000c      0x153 test.o
+                0x000000000100000c                _wait
+                0x0000000001000028                main
+ *fill*         0x000000000100015f 0x100015f00000001 00
+ .text          0x0000000001000160       0x24 ../../libc/memcpy.o
+                0x0000000001000160                memcpy
+ .text          0x0000000001000184       0x1e ../../libc/memset.o
+                0x0000000001000184                memset
+ *fill*         0x00000000010001a2 0x10001a200000002 00
+ .text          0x00000000010001a4       0xd3 ../../libc/sprintf.o
+                0x00000000010001a4                sprintf
+ *fill*         0x0000000001000277 0x100027700000001 00
+ .text          0x0000000001000278       0x8c ../../libc/printf.o
+                0x0000000001000278                printf
+ .text          0x0000000001000304       0x62 ../../libc/strlen.o
+                0x0000000001000304                strlen
+ *fill*         0x0000000001000366 0x100036600000002 00
+ .text          0x0000000001000368      0x184 ../../libc/ultoa.o
+                0x0000000001000368                __ultoa
+                0x00000000010004b8                ultoa
+ .text          0x00000000010004ec       0x16 ../../libc/strchr.o
+                0x00000000010004ec                strchr
+ *fill*         0x0000000001000502 0x100050200000002 00
+ .text          0x0000000001000504       0x29 ../../libc/strcmp.o
+                0x0000000001000504                strcmp
+ *fill*         0x000000000100052d 0x100052d00000003 00
+ .text          0x0000000001000530      0x1c9 ../../libc/system.o
+                0x00000000010005bc                getprocessname
+                0x0000000001000584                getmessage
+                0x000000000100068c                gets
+                0x000000000100056c                findprocess
+                0x0000000001000598                getpid
+                0x000000000100064c                puts
+                0x0000000001000674                sleep
+                0x0000000001000634                setmyname
+                0x00000000010006cc                enableirq
+                0x000000000100061c                sendmessage
+                0x0000000001000530                uname
+                0x0000000001000548                createsharedframe
+                0x0000000001000660                putc
+                0x0000000001000604                isprocess
+                0x00000000010006e4                disableirq
+                0x00000000010005a8                getprocesscount
+                0x000000000100055c                freesharedframe
+                0x00000000010005f0                gettickcount
+                0x00000000010005d4                setprocessstate
+ *fill*         0x00000000010006f9 0x10006f900000007 00
+ .text          0x0000000001000700       0x1d ../../libc/systemcall.o
+                0x0000000001000700                systemcall
+
+.rodata         0x0000000001000720      0x108
+                0x0000000001000720                rodata = .
+ *(.rodata)
+ .rodata        0x0000000001000720       0x84 ../../libc/sprintf.o
+ .rodata        0x00000000010007a4       0x84 ../../libc/printf.o
+
+.rodata.str1.4  0x0000000001000828       0x40
+                0x0000000001000828                rodata.str1.4 = .
+ *(.rodata.str1.4)
+ .rodata.str1.4
+                0x0000000001000828       0x40 test.o
+
+.rodata.str1.1  0x0000000001000868       0x36
+                0x0000000001000868                rodata.str1.1 = .
+ *(.rodata.str1.1)
+ .rodata.str1.1
+                0x0000000001000868       0x1f test.o
+ .rodata.str1.1
+                0x0000000001000887       0x11 ../../libc/ultoa.o
+ .rodata.str1.1
+                0x0000000001000898        0x6 ../../libc/system.o
+
+.data           0x00000000010008a0       0x28
+ *(.data)
+ .data          0x00000000010008a0       0x26 test.o
+                0x00000000010008a0                str
+ *fill*         0x00000000010008c6 0x10008c600000002 00
+                0x00000000010008c8                edata = .
+
+.bss            0x00000000010008e0      0x269
+                0x00000000010008e0                bss = .
+                0x00000000010008e0                _bss = .
+ *(.bss)
+ .bss           0x00000000010008e0        0x4 test.o
+                0x00000000010008e0                floppyd
+ .bss           0x00000000010008e4       0x10 ../../libc/system.o
+ *(.COMMON)
+ *fill*         0x00000000010008f4 0x10008f40000000c 00
+ COMMON         0x0000000001000900      0x240 test.o
+                                          0x0 (size before relaxing)
+                0x0000000001000900                msg
+                0x0000000001000910                addr
+                0x0000000001000920                buf
+                0x0000000001000b20                name
+ COMMON         0x0000000001000b40        0x9 ../../libc/ultoa.o
+                                          0x0 (size before relaxing)
+                0x0000000001000b40                ultoabuf
+                0x0000000001000b49                end = .
+                0x0000000001000b49                _end = .
+START GROUP
+LOAD ../entry/entry.o
+LOAD test.o
+LOAD ../../libc/memcpy.o
+LOAD ../../libc/memset.o
+LOAD ../../libc/sprintf.o
+LOAD ../../libc/printf.o
+LOAD ../../libc/strlen.o
+LOAD ../../libc/ultoa.o
+LOAD ../../libc/strchr.o
+LOAD ../../libc/strcmp.o
+LOAD ../../libc/system.o
+LOAD ../../libc/systemcall.o
+END GROUP
+OUTPUT(../../bin/test.dri binary)
+
+.comment        0x0000000000000000      0x1b0
+ .comment       0x0000000000000000       0x1f ../entry/entry.o
+ .comment       0x000000000000001f       0x25 test.o
+ .comment       0x0000000000000044       0x25 ../../libc/memcpy.o
+ .comment       0x0000000000000069       0x25 ../../libc/memset.o
+ .comment       0x000000000000008e       0x25 ../../libc/sprintf.o
+ .comment       0x00000000000000b3       0x25 ../../libc/printf.o
+ .comment       0x00000000000000d8       0x25 ../../libc/strlen.o
+ .comment       0x00000000000000fd       0x25 ../../libc/ultoa.o
+ .comment       0x0000000000000122       0x25 ../../libc/strchr.o
+ .comment       0x0000000000000147       0x25 ../../libc/strcmp.o
+ .comment       0x000000000000016c       0x25 ../../libc/system.o
+ .comment       0x0000000000000191       0x1f ../../libc/systemcall.o

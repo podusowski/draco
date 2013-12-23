@@ -1,0 +1,11 @@
+floppyd.c: In function `fdc_init':
+floppyd.c:247: warning: assignment makes integer from pointer without a cast
+floppyd.c:249: warning: assignment makes integer from pointer without a cast
+floppyd.c:251: warning: assignment makes integer from pointer without a cast
+floppyd.c: In function `main':
+floppyd.c:282: warning: passing arg 1 of `memcpy' makes pointer from integer without a cast
+floppyd.c:282: warning: passing arg 2 of `memcpy' makes pointer from integer without a cast
+floppyd.c:296: warning: passing arg 1 of `memcpy' makes pointer from integer without a cast
+floppyd.c:296: warning: passing arg 2 of `memcpy' makes pointer from integer without a cast
+floppyd.c:262: warning: return type of 'main' is not `int'
+ld: warning: cannot find entry symbol _start; defaulting to 0000000001000080

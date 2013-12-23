@@ -1,0 +1,8 @@
+sh.c: In function `main':
+sh.c:17: warning: passing arg 1 of `strcmp' from incompatible pointer type
+sh.c:22: warning: passing arg 1 of `strcmp' from incompatible pointer type
+sh.c:27: warning: passing arg 1 of `strcmp' from incompatible pointer type
+sh.c:31: warning: passing arg 1 of `strcmp' from incompatible pointer type
+sh.c:48: warning: passing arg 1 of `strlen' from incompatible pointer type
+sh.c:8: warning: return type of 'main' is not `int'
+ld: warning: cannot find entry symbol _start; defaulting to 0000000001000080

@@ -1,0 +1,8 @@
+keybd.c: In function `do_gets':
+keybd.c:64: warning: initialization makes pointer from integer without a cast
+keybd.c:68: warning: use of cast expressions as lvalues is deprecated
+keybd.c:68: warning: use of cast expressions as lvalues is deprecated
+keybd.c: In function `main':
+keybd.c:115: warning: passing arg 2 of `do_gets' makes pointer from integer without a cast
+keybd.c:102: warning: return type of 'main' is not `int'
+ld: warning: cannot find entry symbol _start; defaulting to 0000000001000080

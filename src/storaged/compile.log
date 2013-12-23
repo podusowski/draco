@@ -1,0 +1,5 @@
+storaged.c: In function `main':
+storaged.c:72: warning: assignment makes pointer from integer without a cast
+storaged.c:83: warning: passing arg 1 of `dev_register' makes pointer from integer without a cast
+storaged.c:58: warning: return type of 'main' is not `int'
+ld: warning: cannot find entry symbol _start; defaulting to 0000000001000080
